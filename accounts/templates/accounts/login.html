@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+	<div class='row'>
+		<div class='col-12 col-md-6 mx-auto mt-5 mb-5'>
+			{% include 'accounts/snippets/form.html' with form=form form_id='login-form' next_url=next_url %}
+		</div>
+	</div>
+</div>
+{% endblock %}

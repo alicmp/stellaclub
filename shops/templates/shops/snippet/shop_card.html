@@ -1,0 +1,25 @@
+{% load staticfiles %}
+{% load get_discount %}
+
+<div class="mb-5">
+  <a href="/s/shop/{{ shop.id }}" class="custom-card">
+    <h4 class="card-title">
+      <i class="fas fa-coffee"></i>
+      {{ shop.get_category_display }} {{ shop.name }}
+    </h4>
+    <div class="thumbnail-img">
+    {% with 'img/'|add:shop.image_name as image_static %}
+      <img class="card-img-top" src="{% static image_static %}" alt="">
+    {% endwith %}
+    </div>
+    <div class="my-4">
+      <p class="card-text">{{ shop.address|truncatewords:5 }}</p>
+    </div>
+    {% get_discount shop as dis %}
+    {% if dis %}
+    <span class="border border-success rounded p-2 text-success">
+        {{ dis }}% تخفیف
+    </span>
+    {% endif %}
+  </a>
+</div>

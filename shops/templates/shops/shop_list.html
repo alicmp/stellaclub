@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block modal %}
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+  a.custom-card, 
+  a.custom-card:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-img-top {
+    border-radius: calc(.5rem - 1px);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="width:100%; background-color:#f2f2f2 ;padding:25px">
+  <h3 style="margin:auto; text-align:center">{% if title %}{{ title }}{% else %}{{ request.GET.cat }}های شیراز{% endif %}</h3>
+</div>
+
+<div class="container">
+  <div class="row mt-5">
+    {% if discounts %}
+    {% for discount in discounts %}
+      <div class="col-sm-4">
+        {% include "shops/snippet/shop_card.html" with shop=discount.shop discount=discount %}
+      </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block js_script %}
+<script>
+</script>
+{% endblock %}

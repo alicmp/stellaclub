@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 mx-auto mt-5">
+      <h1>نتیجه پرداخت</h1>
+      <p class="mt-4">
+      {% if transaction.is_successful %}
+        <span class="text-success">عملیات پرداخت با موفقیت انجام شد.</span>
+      {% else %}
+        <span class="text-danger">خطا در انجام عملیات پرداخت (پرداخت ناموق)</span>
+      {% endif %}
+      </p>
+      <p><strong>موجودی قلک شما:</strong> {{ deposit.total }} تومان</p>
+      <a href="{% url 'checkout' %}" class="btn btn-primary form-control">شکستن قلک</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

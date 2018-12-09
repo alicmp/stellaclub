@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 mx-auto mt-5">
+      <h2>تسویه حساب</h2>
+      {% if messages %}
+      <div class="alert alert-success" role="alert">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+      </div>
+      {% endif %}
+      <p class="mt-4">
+      </p>
+      <p><strong>موجودی قلک شما:</strong> {% if not deposit %}0{% else %}{{ deposit.total }}{% endif %} تومان</p>
+      <form method="POST"> {% csrf_token %}
+        <button type="submit" class="btn btn-primary form-control {% if deposit.total == 0 %}disabled{% endif %}">شکستن قلک</button>
+      </form>
+    </div>
+  </div>
+
+  {% if checkouts %}
+  <div class="row">
+    <div class="col-12 col-md-6 mx-auto mt-5">
+        <h2>تراکنش‌ها</h2>
+        
+        <table class="table table-bordered">
+          <tr>
+            <th>مبلغ تراکنش</th>
+            <th>تاریخ</th>
+            <th>وضعیت</th>
+          </tr>
+          {% for checkout in checkouts %}
+          <tr>
+            <td>{{ checkout.amount }}</td>
+            <td>{{ checkout.requested_date }}</td>
+            <td>{{ checkout.get_status_display }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

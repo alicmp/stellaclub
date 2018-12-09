@@ -1,0 +1,36 @@
+{% url 'logout' as logout_url %}
+{% url 'login' as login_url %}
+
+
+<nav class="navbar justify-content-between navbar-dark bg-dark text-white">
+  <div class="container">
+  <a class="navbar-brand" href="/">
+    اِستلا
+  </a>
+  <form class="form-inline">
+    {% if request.user.is_authenticated %}
+    {{ request.user.full_name }} 
+    |
+    <a href="/accounts/logout" style="margin-right: 5px;"> خروج</a>
+    <!-- <button type="button" class="btn btn-outline-info my-2 my-sm-0" style="align: left; margin-right: 10px; margin-bottom: 20px;"><span class="glyphicon glyphicon-plus	"></span> شارژ قلک</button> -->
+    {% else %}
+    <a href="/accounts/login" style="margin-left: 10px;">ورود/ثبت‌نام</a>
+    {% endif %}
+  </form>
+</div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active text-right" href="/">خانه <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link text-right" href="{% url 'special_offer_page' %}">پیشنهادهای ویژه</a>
+      <a class="nav-item nav-link text-right" href="{% url 'checkout' %}">تسویه حساب</a>
+    </div>
+  </div>
+  </div>
+</nav>

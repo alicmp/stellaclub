@@ -1,0 +1,11 @@
+*.pyc
+*~
+__pycache__
+myvenv
+db.sqlite3
+db1.sqlite3
+deployment_key
+.venv
+.vscode
+/stella/settings.py
+.DS_Store

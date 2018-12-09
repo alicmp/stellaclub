@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-6 mx-auto mt-5">
+      <h1>تایید عملیات</h1>
+      <p class="mt-4">
+        <strong>واریز به: </strong>{{ receiver_user.get_category_display }} {{ receiver_user.name }}<br>
+        {% if receiver_user.full_name %}
+        <strong>نام گیرنده: </strong> {{ receiver_user.full_name }}<br>
+        {% endif %}
+        <strong>مبلغ: </strong> {{ amount }} تومان
+      </p>
+      <p>{{ discount_message }}</p>
+      <div class="row mt-4">
+        <div class="col-6">
+          <a href="{% url 'transaction' %}" class="btn btn-success form-control">پرداخت</a>
+        </div>
+        <div class="col-6">
+          <a href="/" class="btn btn-secondary form-control">بازگشت</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

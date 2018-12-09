@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block modal %}
+  {% include "payment/snippets/purchase_info_modal.html" %}
+{% endblock %}
+
+{% block css %}
+  <style>
+  .due-date {
+    background: yellow;
+    display: inline;
+    padding: 8px;
+  }
+
+.due-date:before {
+    background: yellow;
+    background-image: "{% static 'img/Path29.svg' %}"
+  }
+  </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h1>
+        با اِستلا
+        <br>
+        آنلاین پرداخت کنید
+        <br>
+        <span id="changeText" style="color: #00D6BF">تخفیف بگیرید</span>
+      </h1>
+      {% if messages %}
+      <div class="alert alert-danger" role="alert">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+      </div>
+      {% endif %}
+      <form method="POST"> {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-success mt-2 form-control" type="submit" value="پرداخت">
+      </form>
+    </div>
+    <div class="col-6">
+      <div style="background:aqua; height: 200px; width: 100%;"></div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <h3>پیشنهاد ویژه (شیراز)</h3>
+      <hr style="background: gray;">
+    </div>
+  </div>
+  <div class="row mt-2 mb-4">
+    {% for discount in discounts %}
+    <div class="col-md-4">
+        <h4 class="card-title"><i class="fa fa-coffee" aria-hidden="true"></i> {{ discount.user.full_name }}</h4>
+        <img class="card-img-top" src="{% static 'img/barrel.jpg' %}" alt="Card image cap">
+        <p class="mt-4">
+          <strong>آدرس: </strong> فرهنگشهر انتهای کوچه 31 نبش 16 تاکستان <br>
+        </p>
+        <p>
+          {{ discount.percentage }}%
+        </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
+
+{% block js_script %}
+<script>
+  var textArray = ["پس‌انداز کنید", "قلک خودتون رو پر کنید", "تخفیف بگیرید"];
+  var index = 0;
+  setInterval(function(){        
+  $("#changeText").animate({
+  opacity:0
+  },function()
+  {
+    if(textArray.length > index) {
+    $(this).text(textArray[index]).animate({opacity:1})
+    index++; 
+    }
+    else
+    index = 0;
+  });
+  },2000);
+
+  $('#get-info').click(function() {
+    $('#infoModal').modal('show');
+  });
+</script>
+{% endblock %}
